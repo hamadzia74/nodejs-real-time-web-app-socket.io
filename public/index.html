@@ -12,7 +12,6 @@
     />
     <style>
       form {
-        padding: 20px;
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -76,6 +75,10 @@
         return false;
       });
 
+      socket.on("connect", () => {
+        // emiting to everybody
+        socket.emit("message", "user connected");
+      });
       socket.on("message", (msg) => {
         $("#messages").append($("<li>").text(msg));
       });
