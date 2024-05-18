@@ -10,15 +10,25 @@ server.listen(port, () => {
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
+app.get("/work", (req, res) => {
+  res.sendFile(__dirname + "/public/work.html");
+});
 
-io.on("connection", (socket) => {
+/* Namespace is creating separation that will be useful when we get to work on rooms.
+    So basically, creating an internal endpoint for socket.io to use for rooms like namespace for professional work. 
+    Also add authorization to namepsace. */
+
+// Creating a namespace
+const professionalWrok = io.of("/professional-work");
+
+professionalWrok.on("connection", (socket) => {
   console.log("user connected");
   socket.on("message", (msg) => {
     console.log(`message: ${msg}`);
-    io.emit("message", msg);
+    professionalWrok.emit("message", msg);
   });
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-    io.emit('message', 'user disconnected');
-  })
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+    professionalWrok.emit("message", "user disconnected");
+  });
 });

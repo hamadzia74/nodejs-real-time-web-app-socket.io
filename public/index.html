@@ -10,50 +10,26 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <style>
-      form {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding-right: 50px;
-      }
-      #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-      }
-      #messages li:nth-child(odd) {
-        background-color: #eee;
-      }
-    </style>
   </head>
-  <body>
+  <body class="m-5" style="background-color: #eee">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4 fw-bold">Professional Chat Rooms</h1>
+      <p class="lead">Select which room you'd like to join below!</p>
+    </div>
     <div class="container-fluid">
-      <div class="card vh-100">
-        <div class="card-header fw-bold">Real Time Chatting Application</div>
-        <div class="card-body">
-          <div class="row">
-            <ul id="messages"></ul>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <form id="messageForm" action="">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    id="inputMessage"
-                    autocomplete="off"
-                    class="form-control"
-                    placeholder="Type your Message Here..."
-                    aria-label="Message..."
-                    aria-describedby="button-addon2"
-                  />
-                  <button class="btn btn-success" type="submit">Send</button>
-                </div>
-              </form>
-            </div>
-          </div>
+      <div class="row w-50">
+        <div class="list-group col">
+          <a href="/work" class="list-group-item list-group-item-action">
+            Work
+          </a>
+          <a href="/networking" class="list-group-item list-group-item-action"
+            >Networking</a
+          >
+          <a
+            href="/project-collaboration"
+            class="list-group-item list-group-item-action"
+            >Project Collaboration</a
+          >
         </div>
       </div>
     </div>
@@ -64,24 +40,5 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <!-- loading socket.io on the client to make sure we're able to send commands from socket -->
-    <script src="/socket.io/socket.io.js"></script>
-    <!--  -->
-    <script>
-      const socket = io();
-      $("#messageForm").submit(() => {
-        socket.emit("message", $("#inputMessage").val());
-        $("#inputMessage").val("");
-        return false;
-      });
-
-      socket.on("connect", () => {
-        // emiting to everybody
-        socket.emit("message", "user connected");
-      });
-      socket.on("message", (msg) => {
-        $("#messages").append($("<li>").text(msg));
-      });
-    </script>
   </body>
 </html>
