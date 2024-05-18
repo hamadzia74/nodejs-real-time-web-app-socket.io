@@ -37,11 +37,30 @@ This project is a real-time chatting web application that supports multiple chat
 - `public/index.html`: The frontend HTML file.
 - `public`: Directory containing static files served by Express.
 
-## Contributing
+I welcome contributions to this project. Please follow these guidelines:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
+1. **Fork the repository**: Click the `Fork` button at the top right of this page.
+2. **Create a branch**: Create a new branch for your feature or bug fix.
+    ```bash
+    git checkout -b feature-branch
+    ```
+3. **Make your changes**: Make your changes to the code.
+4. **Commit your changes**: Commit your changes with a descriptive commit message.
+    ```bash
+    git commit -m 'Add some feature'
+    ```
+5. **Push to your branch**: Push your changes to your forked repository.
+    ```bash
+    git push origin feature-branch
+    ```
+6. **Create a Pull Request**: Open a pull request to merge your changes into the main repository. Please provide a detailed description of your changes.
+
+### Code Reviews
+
+All changes must be reviewed before they can be merged. At least one approval from a code owner is required. If you are a code owner, please review pull requests promptly.
+
+### Branch Protection
+
+The `master` branch is protected. Direct pushes to this branch are not allowed. All changes must be made through pull requests.
+
+Thank you for contributing!
