@@ -19,16 +19,23 @@ app.get("/work", (req, res) => {
     Also add authorization to namepsace. */
 
 // Creating a namespace
-const professionalWrok = io.of("/professional-work");
+const professionalChat = io.of("/professional-chat");
 
-professionalWrok.on("connection", (socket) => {
-  console.log("user connected");
-  socket.on("message", (msg) => {
-    console.log(`message: ${msg}`);
-    professionalWrok.emit("message", msg);
+professionalChat.on("connection", (socket) => {
+  // console.log("user connected");
+  socket.on("join", (data) => {
+    socket.join(data.room);
+    professionalChat
+      .in(data.room)
+      .emit("message", `New user joined ${data.room} room!`);
+  });
+  socket.on("message", (data) => {
+    console.log(`message: ${data.msg}`);
+    // professionalChat.emit("message", data.msg);
+    professionalChat.in(data.room).emit("message", data.msg);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
-    professionalWrok.emit("message", "user disconnected");
+    professionalChat.emit("message", "user disconnected");
   });
 });

@@ -46,7 +46,7 @@
                 <div class="input-group mb-3">
                   <input
                     type="text"
-                    id="inputMessage"
+                    id="input"
                     autocomplete="off"
                     class="form-control"
                     placeholder="Type your Message Here..."
@@ -72,16 +72,20 @@
     <script src="/socket.io/socket.io.js"></script>
     <!--  -->
     <script>
-      const socket = io("/professional-work");
+      const room = "work";
+      const socket = io("/professional-chat");
       $("#messageForm").submit(() => {
-        socket.emit("message", $("#inputMessage").val());
-        $("#inputMessage").val("");
+        let msg = $("#input").val();
+        socket.emit("message", { msg, room });
+        $("#input").val("");
         return false;
       });
 
       socket.on("connect", () => {
-        // emiting to everybody
-        socket.emit("message", "user connected");
+        // // emiting to everybody
+        // socket.emit("message", "user connected");
+        // instead of emitting a message, emit a join event and join event will actually pass the room to it
+        socket.emit("join", { room: room });
       });
       socket.on("message", (msg) => {
         $("#messages").append($("<li>").text(msg));
