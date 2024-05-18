@@ -7,11 +7,18 @@ server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+// Routes
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 app.get("/work", (req, res) => {
   res.sendFile(__dirname + "/public/work.html");
+});
+app.get("/networking", (req, res) => {
+  res.sendFile(__dirname + "/public/networking.html");
+});
+app.get("/project-collaboration", (req, res) => {
+  res.sendFile(__dirname + "/public/project-collaboration.html");
 });
 
 /* Namespace is creating separation that will be useful when we get to work on rooms.
